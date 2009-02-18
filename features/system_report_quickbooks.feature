@@ -18,3 +18,11 @@ Feature: Quickbooks Report
 
     Then I should be on the "quickbooks" page
 
+  Scenario: See Unbilled PO amounts
+    Given I am logged in as an Administrator
+    And I am on the system report quickbooks page
+
+    Then I should see "Unbilled PO"
+    And I should see the "Unbilled PO" total
+    And I should see the "Unbilled PO" subtotals
+
