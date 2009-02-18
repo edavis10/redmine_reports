@@ -1,5 +1,5 @@
 Feature: Report Overview
-  As an Administratior
+  As an Administrator
   I want to see a list of reports
   So I can check them easily
 
