@@ -16,6 +16,10 @@ Given /^I am logged in as a User$/ do
   User.stubs(:current).returns(@current_user)
 end
 
+Given /^I am not logged in$/ do
+  User.stubs(:current).returns(User.anonymous)
+end
+
 Given /^I am on the system report overview page$/ do
   visit "/system_reports"
 end
@@ -46,3 +50,8 @@ Then /^I should be denied access$/ do
   response.code.should eql("403")
   response.should render_template('common/403')
 end
+
+Then /^I should go to the login page$/ do
+  response.request.path_parameters["action"].should eql("login")
+end
+
