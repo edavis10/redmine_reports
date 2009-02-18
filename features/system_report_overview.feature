@@ -8,4 +8,4 @@ Feature: Report Overview
     And I am on the system report overview page
 
     Then I should see "Reports"
-    And I should see a list called "reports"
+    And I should see a menu called "reports-menu"

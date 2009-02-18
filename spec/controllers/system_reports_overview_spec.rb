@@ -19,6 +19,6 @@ describe SystemReportsController, "#index" do
 
   it 'should show a link to the Quickbooks report' do
     get :index
-    response.should have_tag('li > a','Quickbooks')
+    response.should have_tag('div > a','Quickbooks')
   end
 end

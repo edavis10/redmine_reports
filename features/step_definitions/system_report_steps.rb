@@ -36,8 +36,8 @@ When /^I visit the "quickbooks" page$/ do
   visit "/system_reports/quickbooks"
 end
 
-Then /^I should see a list called "(.*)"$/ do |named|
-  response.should have_tag("ul##{named}")
+Then /^I should see a menu called "(.*)"$/ do |named|
+  response.should have_tag("div.contextual##{named}")
 end
 
 
