@@ -20,3 +20,6 @@ Then /^I should see a list called "(.*)"$/ do |named|
 end
 
 
+Then /^I should be on the "quickbooks" page$/ do
+  current_url.should =~ %r{/quickbooks$} 
+end
