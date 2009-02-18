@@ -1,7 +1,7 @@
-Feature: Report Authentication
-  As a non Administrator
+Feature: Report Authentication for normal users
+  As a normal User
   I should not have access to any reports
-  So they are protected from un authorized users
+  So they are protected from un-authorized users
 
   Scenario: See the Reports link
     Given I am logged in as a User
@@ -18,5 +18,4 @@ Feature: Report Authentication
     Given I am logged in as a User
     When I visit the "quickbooks" page
     Then I should be denied access
-
 
