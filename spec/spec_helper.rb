@@ -48,3 +48,28 @@ if defined?(Rcov)
   all_app_files.each{|rb| require rb}
 end
 
+module SystemReportsSpecHelper
+  def logged_in_as_admin
+    @current_user = mock_model(User,
+                               :admin? => true,
+                               :logged? => true,
+                               :anonymous? => false,
+                               :name => "Administrator",
+                               :projects => Project)
+    User.stub!(:current).and_return(@current_user)
+    return @current_user
+  end
+
+  def logged_in_as_user
+    @current_user = mock_model(User,
+                               :admin? => false,
+                               :logged? => true,
+                               :anonymous? => false,
+                               :name => "User",
+                               :projects => Project)
+    User.stub!(:current).and_return(@current_user)
+    return @current_user
+  end
+end
+
+include SystemReportsSpecHelper
