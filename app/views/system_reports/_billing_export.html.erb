@@ -2,7 +2,6 @@
   <tr id="<%= label -%>_total" class="billing_export_total">
     <th><%= l(:label_total)%></th>
     <th class="total"><%= number_to_currency total %></th>
-    </th>
   </tr>
   <% items.each do |item| %>
   <% next if item[1].to_f == 0.0 %>
