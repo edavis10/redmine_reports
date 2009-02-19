@@ -13,3 +13,17 @@
   </tr>
   <% end %>
 </table>
+
+<h2><%= l(:reports_text_unspent_labor) %></h2>
+
+<h3 id="unspent_labor_total"><%= l(:label_total)%> <%= number_to_currency @unspent_labor_total%></h3>
+
+<table id="unspent_labor">
+  <% @unspent_labor.each do |project| %>
+  <% next if project[1].to_f <= 0.0 %>
+  <tr>
+    <td class="unspent_labor_user"><%= h project[0] %></td>
+    <td class="unspent_labor_amount"><%= number_to_currency(project[1]) %></td>
+  </tr>
+  <% end %>
+</table>
