@@ -1,0 +1,15 @@
+<%= render :partial => 'menu' %>
+
+<h2><%= l(:reports_text_unbilled_po) %></h2>
+
+<h3 id="unbilled_po_total"><%= l(:label_total)%> <%= number_to_currency @unbilled_po_total%></h3>
+
+<table id="unbilled_po">
+  <% @unbilled_po.each do |project| %>
+  <% next if project[1].to_f <= 0.0 %>
+  <tr>
+    <td class="unbilled_po_project"><%= h project[0] %></td>
+    <td class="unbilled_po_amount"><%= number_to_currency(project[1]) %></td>
+  </tr>
+  <% end %>
+</table>
