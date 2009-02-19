@@ -57,7 +57,7 @@ describe SystemReportsController, "#quickbooks" do
     it 'should show the total of the unbilled po' do
       get :quickbooks
       total = unbilled_po_data.collect {|po_item| po_item[1] }.sum
-      response.should have_tag("h3#unbilled_po_total", /#{total.to_s}/)
+      response.should have_tag("tr#unbilled_po_total", /#{total.to_s}/)
     end
 
     it 'should show the amounts for each project as a currency' do
@@ -85,7 +85,7 @@ describe SystemReportsController, "#quickbooks" do
     it 'should show the total of the unspent labor' do
       get :quickbooks
       total = unspent_labor_data.collect {|item| item[1] }.sum
-      response.should have_tag("h3#unspent_labor_total", /#{number_with_delimiter(total)}/)
+      response.should have_tag("tr#unspent_labor_total", /#{number_with_delimiter(total)}/)
     end
 
     it 'should show the amounts for each project as a currency' do
@@ -113,7 +113,7 @@ describe SystemReportsController, "#quickbooks" do
     it 'should show the total of the unbilled labor' do
       get :quickbooks
       total = unbilled_labor_data.collect {|item| item[1] }.sum
-      response.should have_tag("h3#unbilled_labor_total", /#{number_with_delimiter(total)}/)
+      response.should have_tag("tr#unbilled_labor_total", /#{number_with_delimiter(total)}/)
     end
 
     it 'should show the amounts for each user as a currency' do

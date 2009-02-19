@@ -113,7 +113,7 @@ Then /^I should go to the login page$/ do
 end
 
 Then /^I should see the "Unbilled PO" total$/ do
-  response.should have_tag("h3#unbilled_po_total", /#{@unbilled_po_total}/)
+  response.should have_tag("tr#unbilled_po_total", /#{@unbilled_po_total}/)
 end
 
 Then /^I should see the "Unbilled PO" subtotals$/ do
@@ -126,7 +126,7 @@ end
 
 Then /^I should see the "Unspent Labor" total$/ do
   # TODO: find actual amounts
-  response.should have_tag("h3#unspent_labor_total")
+  response.should have_tag("tr#unspent_labor_total")
 end
 
 # TODO: Needs actual amounts in order to test
@@ -141,7 +141,7 @@ end
 
 Then /^I should see the "Unbilled Labor" total$/ do
   # TODO: find actual amounts
-  response.should have_tag("h3#unbilled_labor_total")
+  response.should have_tag("tr#unbilled_labor_total")
 end
 
 # TODO: Needs actual amounts in order to test
