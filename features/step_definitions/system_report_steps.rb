@@ -26,16 +26,30 @@ end
 
 def unspent_labor_data
   [
-   ["User A", 1000.0],
-   ["User B", 1234.56],
-   ["User C", 123.45],
-   ["User D", 0]
+   ["Project A", 1000.0],
+   ["Project B", 1234.56],
+   ["Project C", 123.45],
+   ["Project D", 0]
   ]
 end
 
 def setup_unspent_labor_data
   @unspent_labor = unspent_labor_data
   @unspent_labor_total = 2358.01
+end
+
+def unbilled_labor_data
+  [
+   ["User A", 2000.0],
+   ["User B", 2234.56],
+   ["User C", 223.45],
+   ["User D", 0]
+  ]
+end
+
+def setup_unbilled_labor_data
+  @unbilled_labor = unbilled_labor_data
+  @unbilled_labor_total = 4458.01
 end
 
 
@@ -60,6 +74,7 @@ end
 Given /^I am on the system report quickbooks page$/ do
   setup_unbilled_po_data
   setup_unspent_labor_data
+  setup_unbilled_labor_data
   visit "/system_reports/quickbooks"
 end
 
@@ -123,3 +138,17 @@ end
 #    end
 # end
 
+
+Then /^I should see the "Unbilled Labor" total$/ do
+  # TODO: find actual amounts
+  response.should have_tag("h3#unbilled_labor_total")
+end
+
+# TODO: Needs actual amounts in order to test
+# Then /^I should see the "Unbilled Labor" subtotals$/ do
+#   response.should have_tag("table#unbilled_labor") do
+#      @unbilled_labor.each do |labor|
+#        with_tag("td.unbilled_labor_amount")
+#      end
+#    end
+# end

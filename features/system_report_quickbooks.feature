@@ -34,3 +34,11 @@ Feature: Quickbooks Report
     And I should see the "Unspent Labor" total
     And I should see the "Unspent Labor" subtotals
 
+  Scenario: See Unbilled Labor amounts
+    Given I am logged in as an Administrator
+    And I am on the system report quickbooks page
+
+    Then I should see "Unbilled Labor"
+    And I should see the "Unbilled Labor" total
+    And I should see the "Unbilled Labor" subtotals
+

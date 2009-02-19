@@ -21,11 +21,21 @@ describe SystemReportsController, "#quickbooks" do
      ["Project D", 0]
     ]
   end
-  
+
+  def unbilled_labor_data
+    [
+     ["User A", 10.0],
+     ["User B", 35.43],
+     ["User C", 2.45],
+     ["User D", 0]
+    ]
+  end
+
   before(:each) do
     logged_in_as_admin
     BillingExport.stub!(:unbilled_po).and_return(unbilled_po_data)
     BillingExport.stub!(:unspent_labor).and_return(unspent_labor_data)
+    BillingExport.stub!(:unbilled_labor).and_return(unbilled_labor_data)
   end
 
   it 'should be successful' do
@@ -90,6 +100,34 @@ describe SystemReportsController, "#quickbooks" do
     it 'should not show the amount for a project with 0' do
       get :quickbooks
       response.should_not have_tag("td.unspent_labor_user",'Project D')
+      response.should_not have_tag("td.unspent_labor_amount",'$0')
+    end
+  end
+
+  describe 'exporting the unbilled labor from the Billing plugin' do
+    it 'should use BillingExport#unbilled_labor' do
+      BillingExport.should_receive(:unbilled_labor).and_return(unbilled_labor_data)
+      get :quickbooks
+    end
+
+    it 'should show the total of the unbilled labor' do
+      get :quickbooks
+      total = unbilled_labor_data.collect {|item| item[1] }.sum
+      response.should have_tag("h3#unbilled_labor_total", /#{number_with_delimiter(total)}/)
+    end
+
+    it 'should show the amounts for each user as a currency' do
+      get :quickbooks
+      response.should have_tag("table#unbilled_labor") do
+        with_tag("td.unbilled_labor_amount",'$10.00')
+        with_tag("td.unbilled_labor_amount",'$35.43')
+        with_tag("td.unbilled_labor_amount",'$2.45')
+      end
+    end
+
+    it 'should not show the amount for a user with 0' do
+      get :quickbooks
+      response.should_not have_tag("td.unspent_labor_user",'User D')
       response.should_not have_tag("td.unspent_labor_amount",'$0')
     end
   end
