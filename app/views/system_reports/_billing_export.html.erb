@@ -5,7 +5,7 @@
     </th>
   </tr>
   <% items.each do |item| %>
-  <% next if item[1].to_f <= 0.0 %>
+  <% next if item[1].to_f == 0.0 %>
   <tr>
     <td class="<%= label -%>_name name"><%= h item[0] %></td>
     <td class="<%= label -%>_amount amount"><%= number_to_currency(item[1]) %></td>
