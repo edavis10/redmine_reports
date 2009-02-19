@@ -15,3 +15,14 @@
 <%= render(:partial => 'billing_export',
            :locals => {:total => @unbilled_labor_total, :items => @unbilled_labor, :label => 'unbilled_labor'}) %>
 
+
+<% content_for(:header_tags) do %>
+<style type="text/css">
+
+table.billing_export { min-width: 50%; }
+table.billing_export th { text-align: left; }
+table.billing_export th.total { text-align: right; }
+table.billing_export td.amount { text-align: right; }
+
+</style>
+<% end %>
