@@ -1,0 +1,13 @@
+<h3 id="<%= label -%>_total"><%= l(:label_total)%> <%= number_to_currency total %></h3>
+
+<table id="<%= label -%>">
+  <% items.each do |item| %>
+  <% next if item[1].to_f <= 0.0 %>
+  <tr>
+    <td class="<%= label -%>_name"><%= h item[0] %></td>
+    <td class="<%= label -%>_amount"><%= number_to_currency(item[1]) %></td>
+  </tr>
+  <% end %>
+</table>
+
+

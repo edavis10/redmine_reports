@@ -2,43 +2,16 @@
 
 <h2><%= l(:reports_text_unbilled_po) %></h2>
 
-<h3 id="unbilled_po_total"><%= l(:label_total)%> <%= number_to_currency @unbilled_po_total%></h3>
-
-<table id="unbilled_po">
-  <% @unbilled_po.each do |project| %>
-  <% next if project[1].to_f <= 0.0 %>
-  <tr>
-    <td class="unbilled_po_project"><%= h project[0] %></td>
-    <td class="unbilled_po_amount"><%= number_to_currency(project[1]) %></td>
-  </tr>
-  <% end %>
-</table>
+<%= render(:partial => 'billing_export',
+           :locals => {:total => @unbilled_po_total, :items => @unbilled_po, :label => 'unbilled_po'}) %>
 
 <h2><%= l(:reports_text_unspent_labor) %></h2>
 
-<h3 id="unspent_labor_total"><%= l(:label_total)%> <%= number_to_currency @unspent_labor_total%></h3>
-
-<table id="unspent_labor">
-  <% @unspent_labor.each do |project| %>
-  <% next if project[1].to_f <= 0.0 %>
-  <tr>
-    <td class="unspent_labor_project"><%= h project[0] %></td>
-    <td class="unspent_labor_amount"><%= number_to_currency(project[1]) %></td>
-  </tr>
-  <% end %>
-</table>
+<%= render(:partial => 'billing_export',
+           :locals => {:total => @unspent_labor_total, :items => @unspent_labor, :label => 'unspent_labor'}) %>
 
 <h2><%= l(:reports_text_unbilled_labor) %></h2>
 
-<h3 id="unbilled_labor_total"><%= l(:label_total)%> <%= number_to_currency @unbilled_labor_total%></h3>
-
-<table id="unbilled_labor">
-  <% @unbilled_labor.each do |user| %>
-  <% next if user[1].to_f <= 0.0 %>
-  <tr>
-    <td class="unbilled_labor_user"><%= h user[0] %></td>
-    <td class="unbilled_labor_amount"><%= number_to_currency(user[1]) %></td>
-  </tr>
-  <% end %>
-</table>
+<%= render(:partial => 'billing_export',
+           :locals => {:total => @unbilled_labor_total, :items => @unbilled_labor, :label => 'unbilled_labor'}) %>
 
