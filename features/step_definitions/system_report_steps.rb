@@ -40,6 +40,9 @@ Then /^I should see a menu called "(.*)"$/ do |named|
   response.should have_tag("div.contextual##{named}")
 end
 
+Then /^I should see a link "(.*)"$/ do |text|
+  response.should have_tag("a", /#{text}/i)
+end
 
 Then /^I should be on the "quickbooks" page$/ do
   current_url.should =~ %r{/quickbooks$} 
