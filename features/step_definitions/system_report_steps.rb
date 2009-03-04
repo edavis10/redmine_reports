@@ -6,7 +6,7 @@ Before do
   @current_user.save!
 end
 
-def unbilled_po_data
+def total_po_data
   [
    ["Project A", 100.0],
    ["Project B", 350.43],
@@ -15,10 +15,10 @@ def unbilled_po_data
   ]
 end
 
-def setup_unbilled_po_data
-  @unbilled_pos = unbilled_po_data
-  @unbilled_po_total = 473.88
-  unbilled_po_data.each do |project_po|
+def setup_total_po_data
+  @total_pos = total_po_data
+  @total_po_total = 473.88
+  total_po_data.each do |project_po|
     project = Project.new(:name => project_po[0], :identifier => project_po[0], :total_value => project_po[1])
     project.save(false)
   end
@@ -72,7 +72,7 @@ Given /^I am on the system report overview page$/ do
 end
 
 Given /^I am on the system report quickbooks page$/ do
-  setup_unbilled_po_data
+  setup_total_po_data
   setup_unspent_labor_data
   setup_unbilled_labor_data
   visit "/system_reports/quickbooks"
@@ -112,14 +112,14 @@ Then /^I should go to the login page$/ do
   response.request.path_parameters["action"].should eql("login")
 end
 
-Then /^I should see the "Unbilled PO" total$/ do
-  response.should have_tag("tr#unbilled_po_total", /#{@unbilled_po_total}/)
+Then /^I should see the "Total PO" total$/ do
+  response.should have_tag("tr#total_po_total", /#{@total_po_total}/)
 end
 
-Then /^I should see the "Unbilled PO" subtotals$/ do
-  response.should have_tag("table#unbilled_po") do
-    @unbilled_pos.each do |po|
-      with_tag("td.unbilled_po_amount",/#{po[1]}/)
+Then /^I should see the "Total PO" subtotals$/ do
+  response.should have_tag("table#total_po") do
+    @total_pos.each do |po|
+      with_tag("td.total_po_amount",/#{po[1]}/)
     end
   end
 end

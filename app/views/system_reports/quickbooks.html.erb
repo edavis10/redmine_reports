@@ -1,9 +1,9 @@
 <%= render :partial => 'menu' %>
 
-<h2><%= l(:reports_text_unbilled_po) %></h2>
+<h2><%= l(:reports_text_total_po) %></h2>
 
 <%= render(:partial => 'billing_export',
-           :locals => {:total => @unbilled_po_total, :items => @unbilled_po, :label => 'unbilled_po'}) %>
+           :locals => {:total => @total_po_total, :items => @total_po, :label => 'total_po'}) %>
 
 <h2><%= l(:reports_text_unspent_labor) %></h2>
 
