@@ -4,13 +4,22 @@ describe SystemReportsController, "#quickbooks" do
   integrate_views
   include ActionView::Helpers::NumberHelper
 
-  def unbilled_po_data
-    [
-     ["Project A", 100.0],
-     ["Project B", 350.43],
-     ["Project C", 23.45],
-     ["Project D", 0]
-    ]
+  def total_po_data
+    {
+     'a' => 100.0,
+     'b' => 350.43,
+     'c' => 23.45,
+     'd' =>  0
+    }
+  end
+
+  def total_po_projects
+    project_a = mock_model(Project, :total_value => total_po_data['a'], :name => "Project A")
+    project_b = mock_model(Project, :total_value => total_po_data['b'], :name => "Project B")
+    project_c = mock_model(Project, :total_value => total_po_data['c'], :name => "Project C")
+    project_d = mock_model(Project, :total_value => total_po_data['d'], :name => "Project D")
+
+    [project_a, project_b, project_c, project_d]
   end
   
   def unspent_labor_data
@@ -33,7 +42,8 @@ describe SystemReportsController, "#quickbooks" do
 
   before(:each) do
     logged_in_as_admin
-    BillingExport.stub!(:unbilled_po).and_return(unbilled_po_data)
+    Project.stub!(:all).and_return([]) # Project jump box conflicts with mocks below
+    Project.stub!(:find).with(:all).and_return(total_po_projects)
     BillingExport.stub!(:unspent_labor).and_return(unspent_labor_data)
     BillingExport.stub!(:unbilled_labor).and_return(unbilled_labor_data)
   end
@@ -48,31 +58,31 @@ describe SystemReportsController, "#quickbooks" do
     response.should render_template('quickbooks')
   end
 
-  describe 'exporting the unbilled po from the Billing plugin' do
-    it 'should use BillingExport#unbilled_po' do
-      BillingExport.should_receive(:unbilled_po).and_return(unbilled_po_data)
+  describe 'exporting the total po from the Billing plugin' do
+    it 'should get the total value for each project' do
+      Project.should_receive(:find).with(:all).and_return(total_po_projects)
       get :quickbooks
     end
 
-    it 'should show the total of the unbilled po' do
+    it 'should show the total of the total po' do
       get :quickbooks
-      total = unbilled_po_data.collect {|po_item| po_item[1] }.sum
-      response.should have_tag("tr#unbilled_po_total", /#{total.to_s}/)
+      total = total_po_data.collect {|project, value| value }.sum
+      response.should have_tag("tr#total_po_total", /#{total.to_s}/)
     end
 
     it 'should show the amounts for each project as a currency' do
       get :quickbooks
-      response.should have_tag("table#unbilled_po") do
-        with_tag("td.unbilled_po_amount",'$100.00')
-        with_tag("td.unbilled_po_amount",'$350.43')
-        with_tag("td.unbilled_po_amount",'$23.45')
+      response.should have_tag("table#total_po") do
+        with_tag("td.total_po_amount",'$100.00')
+        with_tag("td.total_po_amount",'$350.43')
+        with_tag("td.total_po_amount",'$23.45')
       end
     end
 
     it 'should not show the amount for a project with 0' do
       get :quickbooks
-      response.should_not have_tag("td.unbilled_po_project",'Project D')
-      response.should_not have_tag("td.unbilled_po_amount",'$0')
+      response.should_not have_tag("td.total_po_project",'Project D')
+      response.should_not have_tag("td.total_po_amount",'$0')
     end
   end
 
