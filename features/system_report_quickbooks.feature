@@ -42,3 +42,13 @@ Feature: Quickbooks Report
     And I should see the "Unbilled Labor" total
     And I should see the "Unbilled Labor" subtotals
 
+  Scenario: Run Quickbooks Report as normal user
+    Given I am logged in as a User
+    When I visit the "quickbooks" page
+    Then I should be denied access
+
+  Scenario: Run Quickbooks Report as an anonymous user
+    Given I am not logged in
+    When I visit the "quickbooks" page
+    Then I should go to the login page
+
