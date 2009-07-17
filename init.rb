@@ -1,16 +1,8 @@
 require 'redmine'
 
-require 'dispatcher'
 Dir[directory + '/lib/reports/**/*.rb'].each do |report|
   require report
 end
-
-Dispatcher.to_prepare do
-  SystemReportsController.add_report(:quickbooks, Reports::Quickbooks, {:action => :quickbooks, :label => :reports_quickbooks})
-  SystemReportsController.require_admin(:quickbooks)
-end
-
-
 
 Redmine::Plugin.register :redmine_reports do
   name 'Redmine Reports plugin'

@@ -6,6 +6,8 @@ class SystemReportsController < ApplicationController
 
   cattr_accessor :reports
   cattr_accessor :admin_required
+
+  self.admin_required = []
   
   def index
   end
