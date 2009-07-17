@@ -4,7 +4,8 @@ describe SystemReportsController, "#index" do
   integrate_views
 
   before(:each) do
-    logged_in_as_admin
+    logged_in_as_user
+    @current_user.stub!(:allowed_to?).and_return(false)
   end
   
   it 'should be successful' do
@@ -16,9 +17,17 @@ describe SystemReportsController, "#index" do
     get :index
     response.should render_template('index')
   end
+end
 
-  it 'should show a link to the Quickbooks report' do
-    get :index
-    response.should have_tag('div > a','Quickbooks')
+describe SystemReportsController, "with a anonymous user visiting" do
+  describe "#index" do
+    integrate_views
+  
+    def do_request
+      get :index
+    end
+    
+    it_should_behave_like "login_required"
   end
+
 end

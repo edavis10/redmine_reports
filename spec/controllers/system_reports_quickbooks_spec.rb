@@ -142,3 +142,34 @@ describe SystemReportsController, "#quickbooks" do
     end
   end
 end
+
+describe SystemReportsController, "with a anonymous user visiting" do
+  describe "#quickbooks" do
+    integrate_views
+  
+    def do_request
+      get :quickbooks
+    end
+    
+    it_should_behave_like "login_required"
+  end
+
+end
+
+describe SystemReportsController, "with an unauthorized user visiting" do
+  describe "#quickbooks" do
+    integrate_views
+  
+    def do_request
+      get :quickbooks
+    end
+    
+    before(:each) do
+      logged_in_as_user
+      @current_user.stub!(:allowed_to?).and_return(false)
+    end
+
+    it_should_behave_like "denied_access"
+  end
+
+end

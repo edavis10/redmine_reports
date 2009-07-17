@@ -37,6 +37,8 @@ class SystemReportsController < ApplicationController
     if SystemReportsController.admin_required.include?(params[:action].to_sym)
       return require_admin
     end
+
+    return require_login
   end
 end
 
