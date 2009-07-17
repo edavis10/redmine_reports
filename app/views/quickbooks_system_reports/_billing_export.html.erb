@@ -1,0 +1,15 @@
+<table id="<%= label -%>" class="billing_export">
+  <tr id="<%= label -%>_total" class="billing_export_total">
+    <th><%= l(:label_total)%></th>
+    <th class="total"><%= number_to_currency total %></th>
+  </tr>
+  <% items.each do |item| %>
+  <% next if item[1].to_f == 0.0 %>
+  <tr>
+    <td class="<%= label -%>_name name"><%= h item[0] %></td>
+    <td class="<%= label -%>_amount amount"><%= number_to_currency(item[1]) %></td>
+  </tr>
+  <% end %>
+</table>
+
+

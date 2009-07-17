@@ -1,0 +1,28 @@
+<%= render :partial => 'menu' %>
+
+<h2><%= l(:reports_text_unbilled_po) %></h2>
+
+<%= render(:partial => 'billing_export',
+           :locals => {:total => @unbilled_po_total, :items => @unbilled_po, :label => 'unbilled_po'}) %>
+
+<h2><%= l(:reports_text_unspent_labor) %></h2>
+
+<%= render(:partial => 'billing_export',
+           :locals => {:total => @unspent_labor_total, :items => @unspent_labor, :label => 'unspent_labor'}) %>
+
+<h2><%= l(:reports_text_unbilled_labor) %></h2>
+
+<%= render(:partial => 'billing_export',
+           :locals => {:total => @unbilled_labor_total, :items => @unbilled_labor, :label => 'unbilled_labor'}) %>
+
+
+<% content_for(:header_tags) do %>
+<style type="text/css">
+
+table.billing_export { min-width: 50%; }
+table.billing_export th { text-align: left; }
+table.billing_export th.total { text-align: right; }
+table.billing_export td.amount { text-align: right; }
+
+</style>
+<% end %>
