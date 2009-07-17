@@ -1,10 +1,11 @@
 require_dependency 'application'
 
 class SystemReportsController < ApplicationController
-  before_filter :require_admin
   unloadable
+  before_filter :check_permissions
 
   cattr_accessor :reports
+  cattr_accessor :admin_required
   
   def index
   end
@@ -24,8 +25,18 @@ class SystemReportsController < ApplicationController
     self
   end
   
-  def self.require_admin(action=nil)
+  def self.require_admin(action)
+    self.admin_required ||= []
+    self.admin_required << action.to_sym
+    self.admin_required.uniq!
+  end
 
+  private
+
+  def check_permissions
+    if SystemReportsController.admin_required.include?(params[:action].to_sym)
+      return require_admin
+    end
   end
 end
 
