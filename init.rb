@@ -3,7 +3,7 @@ require 'redmine'
 require 'dispatcher'
 
 Dispatcher.to_prepare do
-  Dir['lib/reports/**/*.rb'].each do |report|
+  Dir[directory + '/lib/reports/**/*.rb'].each do |report|
     require report
   end
 end

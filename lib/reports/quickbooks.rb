@@ -13,5 +13,6 @@ module Reports
   end
 end
 
-SystemReportsController.send(:include, Reports::Quickbooks)
+SystemReportsController.add_report(:quickbooks, Reports::Quickbooks, {:action => :quickbooks, :label => :reports_quickbooks})
 SystemReportsController.require_admin(:quickbooks)
+

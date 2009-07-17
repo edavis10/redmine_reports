@@ -1,4 +1,3 @@
 <div class="contextual" id="reports-menu">
-  <%= link_to l(:reports_overview), {:action => 'index'}, :class => 'icon' %>
-  <%= link_to l(:reports_quickbooks), {:action => 'quickbooks'}, :class => 'icon' %>
+  <%= report_menu.join(" ") %>
 </div>
