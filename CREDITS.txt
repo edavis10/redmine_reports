@@ -1,0 +1,6 @@
+Thanks go to the following people for patches and contributions:
+
+* Eric Davis of Little Stream Software - Project Maintainer
+* Peter Chester of Shane and Peter, Inc - Project Sponsor
+* Shane Pearlman of Shane and Peter, Inc - Project Sponsor
+* Bill Tihen of Leysin American School in Switzerland - Project Sponsor
