@@ -55,7 +55,10 @@ module SystemReportsSpecHelper
                                :logged? => true,
                                :anonymous? => false,
                                :name => "Administrator",
-                               :projects => Project)
+                               :projects => Project,
+                               :language => 'en')
+    @current_user.stub!(:allowed_to?).and_return(true)
+
     User.stub!(:current).and_return(@current_user)
     return @current_user
   end
@@ -66,7 +69,8 @@ module SystemReportsSpecHelper
                                :logged? => true,
                                :anonymous? => false,
                                :name => "User",
-                               :projects => Project)
+                               :projects => Project,
+                               :language => 'en')
     User.stub!(:current).and_return(@current_user)
     return @current_user
   end

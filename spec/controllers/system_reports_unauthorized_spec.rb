@@ -79,6 +79,7 @@ describe SystemReportsController, "with an unauthorized user visiting" do
     
     before(:each) do
       logged_in_as_user
+      @current_user.stub!(:allowed_to?).and_return(false)
     end
 
     it_should_behave_like "denied_access"

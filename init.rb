@@ -1,5 +1,15 @@
 require 'redmine'
 
+require 'dispatcher'
+
+Dispatcher.to_prepare do
+  Dir['lib/reports/**/*.rb'].each do |report|
+    require report
+  end
+end
+
+
+
 Redmine::Plugin.register :redmine_reports do
   name 'Redmine Reports plugin'
   author 'Eric Davis'
