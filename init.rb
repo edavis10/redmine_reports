@@ -1,11 +1,13 @@
 require 'redmine'
 
 require 'dispatcher'
+Dir[directory + '/lib/reports/**/*.rb'].each do |report|
+  require report
+end
 
 Dispatcher.to_prepare do
-  Dir[directory + '/lib/reports/**/*.rb'].each do |report|
-    require report
-  end
+  SystemReportsController.add_report(:quickbooks, Reports::Quickbooks, {:action => :quickbooks, :label => :reports_quickbooks})
+  SystemReportsController.require_admin(:quickbooks)
 end
 
 
@@ -20,5 +22,5 @@ Redmine::Plugin.register :redmine_reports do
   
   requires_redmine :version_or_higher => '0.8.0'
 
-  menu :top_menu, :reports, { :controller => 'system_reports', :action => 'index'}, :caption => :reports_menu, :if => Proc.new{User.current.logged? && User.current.admin?}
+  menu :top_menu, :reports, { :controller => 'system_reports', :action => 'index'}, :caption => :reports_menu, :if => Proc.new{User.current.logged?}
 end
