@@ -14,6 +14,6 @@ Dispatcher.to_prepare do
   # TODO: A better core API?
   Redmine::AccessControl.map {|map|
     map.permission(:run_completion_count, {:system_reports => [:completion_count]})
-  }
+  } if Redmine::AccessControl.permission(:run_completion_count).nil?
   
 end

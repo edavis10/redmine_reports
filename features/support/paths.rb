@@ -5,7 +5,7 @@ def path_to(page_name)
     url_for(:controller => 'welcome')
   when /system report overview/i
     url_for(:controller => 'system_reports')
-  when /system report quickbooks page/i
+  when /quickbooks/i
     url_for(:controller => 'system_reports', :action => 'quickbooks')
   when /completion count/i
     url_for(:controller => 'system_reports', :action => 'completion_count')

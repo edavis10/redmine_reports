@@ -33,9 +33,9 @@ Feature: Completion Count Report
     When I visit the "completion count" page
 
     Then I should see "Completion Count Report"
-    And there should be a select field for "date_from"
-    And there should be a select field for "date_to"
-    And there should be a select field for "users"
+    And I should see "Start"
+    And I should see "End date"
+    And I should see "Users"
 
   Scenario: Run report
     Given I am logged in as a user with permission to "run completion count"
@@ -43,7 +43,6 @@ Feature: Completion Count Report
     And I select some valid values for the report
     And I press "Apply"
 
-    Then I am on the Completion Count page
-    And I see the totals
+    Then I see the totals
     And I see a subreport for each user
  

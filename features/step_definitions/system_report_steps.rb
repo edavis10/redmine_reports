@@ -66,8 +66,8 @@ end
 
 Given /^I am logged in as a user with permission to "(.*)"$/ do |permission|
   Given "I am logged in as a User"
-  permission_item = permission.gsub(' ','_').downcase.to_sym
-  @current_user.stubs(:allowed_to?).with(permission_item, nil, {:global => true}).returns(true)
+  permission_name = permission.gsub(' ','_').downcase.to_sym
+  @current_user.stubs(:allowed_to?).with(permission_name_to_path(permission_name), nil, {:global => true}).returns(true)
 end
 
 Given /^I am not logged in$/ do
@@ -87,6 +87,11 @@ end
 
 When /^I visit the "(.*)" page$/ do |page_name|
   visit path_to(page_name)
+end
+
+When /^I select some valid values for the report$/ do
+  When 'I fill in "Start" with "2009-01-01"'
+  When 'I fill in "End date" with "2009-01-06"'
 end
 
 Then /^I should see a menu called "(.*)"$/ do |named|
@@ -151,3 +156,15 @@ end
 #      end
 #    end
 # end
+
+Then /^I see the totals$/ do
+  response.should have_tag("table#totals") do
+    with_tag('tr.incoming')
+    with_tag('tr.completed')
+    with_tag('tr.difference')
+  end
+end
+
+Then /^I see a subreport for each user$/ do
+  response.should have_tag("table.user-report", :count => User.active.count)
+end

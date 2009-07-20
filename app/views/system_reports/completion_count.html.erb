@@ -6,13 +6,13 @@
 
 <p><%= f.text_field :start_date, :size => 10 %><%= calendar_for('completion_count_start_date') %></p>
 <p><%= f.text_field :end_date, :size => 10 %><%= calendar_for('completion_count_end_date') %></p>
-<p><%= f.collection_select :user_ids, @completion_count.default_users, :id, :name, {:prompt => 'All techs', :selected => @completion_count.selected_user_ids}, {:multiple => true} %></p>
+<p><%= f.label :users %><%= f.collection_select :user_ids, @completion_count.default_users, :id, :name, {:prompt => 'All techs', :selected => @completion_count.selected_user_ids}, {:multiple => true} %></p>
 <%= submit_tag l(:button_apply) %>
 <% end %>
 
 <% if request.post? %>
 
-<table class="list issues">
+<table class="list issues" id="totals">
   <thead>
     <th colspan="2">All Techs</th>
   </thead>
@@ -34,7 +34,7 @@
 <br />
 
 <% @completion_count.selected_users_or_all_users.each do |user| %>
-<table class="list issues" id="user-<%= h user.id -%>">
+<table class="list issues user-report" id="user-<%= h user.id -%>">
   <thead>
     <th colspan="2"><%= h user.name %></th>
   </thead>
