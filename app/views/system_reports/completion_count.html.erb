@@ -9,3 +9,30 @@
 <p><%= f.select :users, @completion_count.default_users.collect {|m| [m.name, m.id]}, {:include_blank => true, :selected => @completion_count.selected_users}, {:multiple => true} %></p>
 <%= submit_tag l(:button_apply) %>
 <% end %>
+
+<% if request.post? %>
+
+All techs
+
+<table class="list issues">
+  <thead>
+    <th colspan="2">All Techs</th>
+  </thead>
+  <tbody>
+    <tr class="incoming">
+      <td>Incoming</td>
+      <td><%= @completion_count.total_incoming %></td>
+    </tr>
+    <tr class="completed">
+      <td>Completed</td>
+      <td><%= @completion_count.total_completed %></td>
+    </tr>
+    <tr class="difference">
+      <td>Difference</td>
+      <td><%= @completion_count.total_incoming - @completion_count.total_completed %></td>
+    </tr>
+  </tbody>
+</table>
+<br />
+
+<% end %>

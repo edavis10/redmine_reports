@@ -57,20 +57,50 @@ describe SystemReportsController, "POST #completion_count" do
   end
 
   describe 'with valid data' do
+    def data(additional_data={})
+      {
+        "start_date"=>"2009-07-01",
+        "end_date"=>"2009-07-31",
+        "users"=>["13", "14", "15", "16", "17", "18", "19", "20", "21"]
+      }.merge(additional_data)
+    end
+    
     it 'should be successful' do
-      post :completion_count, {}
+      post :completion_count, :completion_count => data
       response.should be_success
     end
 
     it 'should render the completion_count template' do
-      post :completion_count, {}
+      post :completion_count, :completion_count => data
       response.should render_template('completion_count')
     end
 
     describe 'summary section' do
-      it 'should show the total incoming'
-      it 'should show the total completed'
-      it 'should show the difference'
+      before(:each) do
+        @completion_count = CompletionCount.new(data)
+        CompletionCount.should_receive(:new).and_return(@completion_count)
+      end
+      
+      it 'should show the total incoming' do
+        @completion_count.should_receive(:total_incoming).twice.and_return(42)
+        post :completion_count, :completion_count => data
+        response.should have_tag("tr.incoming td", "42")
+      end
+
+      it 'should show the total completed' do
+        @completion_count.should_receive(:total_completed).twice.and_return(154)
+        post :completion_count, :completion_count => data
+        response.should have_tag("tr.completed td", "154")
+
+      end
+
+      it 'should show the difference' do
+        @completion_count.should_receive(:total_incoming).twice.and_return(42)
+        @completion_count.should_receive(:total_completed).twice.and_return(154)
+        post :completion_count, :completion_count => data
+        response.should have_tag("tr.difference td", "-112")
+      end
+
     end
 
     describe 'user section' do
