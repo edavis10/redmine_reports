@@ -7,7 +7,7 @@ end
 Redmine::Plugin.register :redmine_reports do
   name 'Redmine Reports plugin'
   author 'Eric Davis'
-  url 'https://redmine.shaneandpeter.com'
+  url 'https://projects.littlestreamsoftware.com/projects/redmine-reports'
   author_url 'http://www.littlestreamsoftware.com'
   description 'This is a plugin for Redmine reports'
   version '0.1.0'
