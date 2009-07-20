@@ -3,12 +3,16 @@ class CompletionCount < EphemeralModel
   column :end_date, :string
 
   has_many :users
-  
+
   def default_users
     User.active
   end
 
-  def selected_users
+  def selected_users_or_all_users
+    users.blank? ? User.active : users
+  end
+    
+  def selected_user_ids
     users.collect(&:id).collect(&:to_i) if users
   end
 
