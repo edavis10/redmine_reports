@@ -20,6 +20,7 @@ Feature: Quickbooks Report
 
   Scenario: See Total PO amounts
     Given I am logged in as an Administrator
+    And billing data is in the system
     And I am on the system report quickbooks page
 
     Then I should see "Total PO"
@@ -28,6 +29,7 @@ Feature: Quickbooks Report
 
   Scenario: See Unspent Labor amounts
     Given I am logged in as an Administrator
+    And billing data is in the system
     And I am on the system report quickbooks page
 
     Then I should see "Unspent Labor"
@@ -36,6 +38,7 @@ Feature: Quickbooks Report
 
   Scenario: See Unbilled Labor amounts
     Given I am logged in as an Administrator
+    And billing data is in the system
     And I am on the system report quickbooks page
 
     Then I should see "Unbilled Labor"

@@ -60,34 +60,34 @@ end
 
 Given /^I am logged in as a User$/ do
   @current_user.stubs(:admin?).returns(false)
+  @current_user.stubs(:allowed_to?).returns(false)
   User.stubs(:current).returns(@current_user)
+end
+
+Given /^I am logged in as a user with permission to "(.*)"$/ do |permission|
+  Given "I am logged in as a User"
+  permission_item = permission.gsub(' ','_').downcase.to_sym
+  @current_user.stubs(:allowed_to?).with(permission_item, nil, {:global => true}).returns(true)
 end
 
 Given /^I am not logged in$/ do
   User.stubs(:current).returns(User.anonymous)
 end
 
-Given /^I am on the system report overview page$/ do
-  visit "/system_reports"
+Given /^I am on the (.*)$/ do |page_name|
+  visit path_to(page_name)
+  assert_response :success
 end
 
-Given /^I am on the system report quickbooks page$/ do
+Given /^billing data is in the system$/ do
   setup_total_po_data
   setup_unspent_labor_data
   setup_unbilled_labor_data
-  visit "/system_reports/quickbooks"
 end
 
-Given /^I am on the home page$/ do
-  visit "/"
-end
-
-When /^I visit the "system report overview" page$/ do
-  visit "/system_reports"
-end
-
-When /^I visit the "quickbooks" page$/ do
-  visit "/system_reports/quickbooks"
+When /^I visit the "(.*)" page$/ do |page_name|
+  visit path_to(page_name)
+  assert_response :success
 end
 
 Then /^I should see a menu called "(.*)"$/ do |named|

@@ -5,13 +5,13 @@ Feature: System Report Menu Item
 
   Scenario: See the Reports link as a User
     Given I am logged in as a User
-    And I am on the home page
+    And I am on the homepage
 
     Then I should see "Reports"
 
   Scenario: See the Reports link as an anonymous User
     Given I am not logged in
-    And I am on the home page
+    And I am on the homepage
 
     Then I should not see "Reports"
 

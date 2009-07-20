@@ -5,13 +5,13 @@ Feature: Report Overview
 
   Scenario: See the Reports link
     Given I am logged in as a User
-    And I am on the home page
+    And I am on the homepage
 
     Then I should see "Reports"
 
   Scenario: See the Reports link
     Given I am not logged in
-    And I am on the home page
+    And I am on the homepage
 
     Then I should not see "Reports"
 
