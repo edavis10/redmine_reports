@@ -14,19 +14,19 @@
 
 <table class="list issues" id="totals">
   <thead>
-    <th colspan="2">All Techs</th>
+    <th colspan="2"><%= l(:reports_completion_count_all_users)%></th>
   </thead>
   <tbody>
     <tr class="incoming">
-      <td>Incoming</td>
+      <td><%= l(:reports_completion_count_incoming) %></td>
       <td><%= @completion_count.total_incoming %></td>
     </tr>
     <tr class="completed">
-      <td>Completed</td>
+      <td><%= l(:reports_completion_count_completed) %></td>
       <td><%= @completion_count.total_completed %></td>
     </tr>
     <tr class="difference">
-      <td>Difference</td>
+      <td><%= l(:reports_completion_count_difference) %></td>
       <td><%= @completion_count.total_incoming - @completion_count.total_completed %></td>
     </tr>
   </tbody>

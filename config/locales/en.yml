@@ -7,5 +7,10 @@ en:
   reports_text_unbilled_labor: Unbilled Labor
   reports_text_total_po: Total PO
   reports_completion_count: Completion Count Report
+  reports_completion_count_incoming: Incoming
+  reports_completion_count_completed: Completed
+  reports_completion_count_difference: Difference
+  reports_completion_count_all_users: All Users
+
   field_end_date: End date
   field_users: Users
