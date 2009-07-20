@@ -31,7 +31,7 @@ describe SystemReportsController, "with an unauthorized user visiting" do
 
 end
 
-describe SystemReportsController, "POST #completion_count" do
+describe SystemReportsController, "GET #completion_count" do
   integrate_views
 
   before(:each) do
@@ -52,8 +52,18 @@ end
 describe SystemReportsController, "POST #completion_count" do
   integrate_views
 
+  def user_mocks
+    User.stub!(:find).and_return do
+      [
+       mock_model(User, :id => 13, :name => 'Test 13'),
+       mock_model(User, :id => 14, :name => 'Test 14')
+      ]
+    end
+  end
+  
   before(:each) do
     logged_in_as_admin
+    user_mocks
   end
 
   describe 'with valid data' do
@@ -61,7 +71,7 @@ describe SystemReportsController, "POST #completion_count" do
       {
         "start_date"=>"2009-07-01",
         "end_date"=>"2009-07-31",
-        "users"=>["13", "14", "15", "16", "17", "18", "19", "20", "21"]
+        "user_ids"=>["13", "14"]
       }.merge(additional_data)
     end
     
@@ -104,7 +114,48 @@ describe SystemReportsController, "POST #completion_count" do
     end
 
     describe 'user section' do
-      it 'should show the sum of each tracker for the user'
+      it 'should show the sum of each tracker for each user' do
+        @bug = mock_model(Tracker, :name => 'Bug')
+        @feature = mock_model(Tracker, :name => 'Feature')
+        Tracker.should_receive(:all).at_least(:once).and_return do
+          [@bug, @feature]
+        end
+
+        @completion_count = CompletionCount.new(data)
+        CompletionCount.should_receive(:new).and_return(@completion_count)
+
+        @completion_count.should_receive(:total_by_tracker_for_user).with(@bug, 13).and_return(12)
+        @completion_count.should_receive(:total_by_tracker_for_user).with(@feature, 13).and_return(16)
+        @completion_count.should_receive(:total_by_tracker_for_user).with(@bug, 14).and_return(24)
+        @completion_count.should_receive(:total_by_tracker_for_user).with(@feature, 14).and_return(56)
+        
+        post :completion_count, :completion_count => data
+
+        response.should have_tag("#user-13") do
+          with_tag("tr#tracker-#{@bug.id}") do
+            with_tag('td', '12')
+          end
+        end
+
+        response.should have_tag("#user-13") do
+          with_tag("tr#tracker-#{@feature.id}") do
+            with_tag('td', '16')
+          end
+        end
+
+        response.should have_tag("#user-14") do
+          with_tag("tr#tracker-#{@bug.id}") do
+            with_tag('td', '24')
+          end
+        end
+
+        response.should have_tag("#user-14") do
+          with_tag("tr#tracker-#{@feature.id}") do
+            with_tag('td', '56')
+          end
+        end
+        
+      end
     end
   end
 

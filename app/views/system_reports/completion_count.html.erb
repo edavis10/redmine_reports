@@ -6,13 +6,11 @@
 
 <p><%= f.text_field :start_date, :size => 10 %><%= calendar_for('completion_count_start_date') %></p>
 <p><%= f.text_field :end_date, :size => 10 %><%= calendar_for('completion_count_end_date') %></p>
-<p><%= f.select :users, @completion_count.default_users.collect {|m| [m.name, m.id]}, {:include_blank => true, :selected => @completion_count.selected_users}, {:multiple => true} %></p>
+<p><%= f.collection_select :user_ids, @completion_count.default_users, :id, :name, {:include_blank => true, :selected => @completion_count.selected_users}, {:multiple => true} %></p>
 <%= submit_tag l(:button_apply) %>
 <% end %>
 
 <% if request.post? %>
-
-All techs
 
 <table class="list issues">
   <thead>
@@ -34,5 +32,23 @@ All techs
   </tbody>
 </table>
 <br />
+
+<% @completion_count.users.each do |user| %>
+<table class="list issues" id="user-<%= h user.id -%>">
+  <thead>
+    <th colspan="2"><%= h user.name %></th>
+  </thead>
+  <tbody>
+    <% Tracker.all.each do |tracker| %>
+    <tr class="tracker" id="tracker-<%= tracker.id -%>">
+      <td><%= h tracker.name %></td>
+      <td><%= @completion_count.total_by_tracker_for_user(tracker, user.id) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<br />
+
+<% end %>
 
 <% end %>

@@ -38,6 +38,24 @@ describe CompletionCount, '#total_completed' do
   end
 end
 
-describe CompletionCount, '#total_tracker_for_user' do
-  it 'should get a count of the number of tasks that are in the tracker for the user'
+describe CompletionCount, '#total_by_tracker_for_user' do
+  it 'should get a count of the number of tasks that are in the tracker for the user' do
+    start_date = Date.yesterday
+    end_date = Date.today
+    @completion_count = CompletionCount.new(:start_date => start_date, :end_date => end_date)
+
+    @tracker = mock_model(Tracker)
+
+    Issue.should_receive(:visible).and_return(Issue)
+    conditions = ["#{Issue.table_name}.updated_on >= (?) and #{Issue.table_name}.updated_on <= (?) and #{Issue.table_name}.tracker_id = (?) and #{Issue.table_name}.assigned_to_id = (?)",
+                  start_date,
+                  end_date,
+                  @tracker.id,
+                  123
+                 ]
+    
+    Issue.should_receive(:count).with(:conditions => conditions).and_return(1200)
+    
+    @completion_count.total_by_tracker_for_user(@tracker, 123).should eql(1200)
+  end
 end

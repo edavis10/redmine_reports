@@ -1,14 +1,15 @@
 class CompletionCount < EphemeralModel
   column :start_date, :string
   column :end_date, :string
-  attr_accessor :users
+
+  has_many :users
   
   def default_users
     User.active
   end
 
   def selected_users
-    users.collect(&:to_i) if users
+    users.collect(&:id).collect(&:to_i) if users
   end
 
   def total_incoming
@@ -27,5 +28,15 @@ class CompletionCount < EphemeralModel
                          closed_issue_status_ids
                         ])
 
+  end
+
+  def total_by_tracker_for_user(tracker, user_id)
+    Issue.visible.count(:conditions =>
+                        ["#{Issue.table_name}.updated_on >= (?) and #{Issue.table_name}.updated_on <= (?) and #{Issue.table_name}.tracker_id = (?) and #{Issue.table_name}.assigned_to_id = (?)",
+                         start_date,
+                         end_date,
+                         tracker.id,
+                         user_id
+                        ])
   end
 end
