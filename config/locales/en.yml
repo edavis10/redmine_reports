@@ -6,3 +6,6 @@ en:
   reports_text_unspent_labor: Unspent Labor
   reports_text_unbilled_labor: Unbilled Labor
   reports_text_total_po: Total PO
+  reports_completion_count: Completion Count Report
+  field_end_date: End date
+  field_users: Users
