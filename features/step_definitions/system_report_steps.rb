@@ -87,7 +87,6 @@ end
 
 When /^I visit the "(.*)" page$/ do |page_name|
   visit path_to(page_name)
-  assert_response :success
 end
 
 Then /^I should see a menu called "(.*)"$/ do |named|
