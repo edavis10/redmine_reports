@@ -1,8 +1,8 @@
 <%= render :partial => 'menu' %>
 
 <h2><%= l(:reports_completion_count) %></h2>
-
 <% labelled_tabular_form_for :completion_count, @completion_count, {} do |f| %>
+<%= error_messages_for 'completion_count' %>
 
 <p><%= f.text_field :start_date, :size => 10 %><%= calendar_for('completion_count_start_date') %></p>
 <p><%= f.text_field :end_date, :size => 10 %><%= calendar_for('completion_count_end_date') %></p>
@@ -10,7 +10,7 @@
 <%= submit_tag l(:button_apply) %>
 <% end %>
 
-<% if request.post? %>
+<% if request.post? && @completion_count.valid? %>
 
 <table class="list issues" id="totals">
   <thead>

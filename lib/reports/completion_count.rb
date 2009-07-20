@@ -2,6 +2,9 @@ module Reports
   module CompletionCount
     def completion_count
       @completion_count = ::CompletionCount.new(params[:completion_count])
+      if request.post?
+        @completion_count.valid?
+      end
     end
   end
 end

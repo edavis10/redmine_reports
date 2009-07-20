@@ -4,6 +4,15 @@ class CompletionCount < EphemeralModel
 
   has_many :users
 
+  validates_presence_of :start_date
+  validates_presence_of :end_date
+
+  def validate
+    if self.end_date && self.start_date && self.end_date < self.start_date
+      errors.add :end_date, :greater_than_start_date
+    end
+  end
+  
   def default_users
     User.active
   end

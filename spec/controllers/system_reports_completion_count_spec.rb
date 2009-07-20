@@ -55,8 +55,8 @@ describe SystemReportsController, "POST #completion_count" do
   def user_mocks
     User.stub!(:find).and_return do
       [
-       mock_model(User, :id => 13, :name => 'Test 13'),
-       mock_model(User, :id => 14, :name => 'Test 14')
+       mock_model(User, :id => 13, :name => 'Test 13', :valid? => true),
+       mock_model(User, :id => 14, :name => 'Test 14', :valid? => true)
       ]
     end
   end
@@ -165,7 +165,12 @@ describe SystemReportsController, "POST #completion_count" do
       response.should render_template('completion_count')
     end
 
-    it 'should display the errors'
+    it 'should display the errors' do
+      post :completion_count, {}
+      assigns[:completion_count].should have(1).errors_on(:start_date)
+      assigns[:completion_count].should have(1).errors_on(:end_date)
+
+    end
   end
 end
 
