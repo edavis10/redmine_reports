@@ -1,0 +1,15 @@
+<% user = completion_count_for_user %>
+<table class="list issues user-report" id="user-<%= h user.id -%>">
+  <thead>
+    <th colspan="2"><%= h user.name %></th>
+  </thead>
+  <tbody>
+    <% trackers.each do |tracker| %>
+    <tr class="tracker" id="tracker-<%= tracker.id -%>">
+      <td><%= h tracker.name %></td>
+      <td><%= completion_count.total_by_tracker_for_user(tracker, user.id) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<br />
