@@ -40,7 +40,11 @@ class SystemReportsController < ApplicationController
       return require_admin
     end
 
-    return require_login
+    if params[:controller] == 'system_reports' &&  params[:action] == 'index'
+      return require_login
+    else
+      return authorize_global
+    end
   end
 end
 
