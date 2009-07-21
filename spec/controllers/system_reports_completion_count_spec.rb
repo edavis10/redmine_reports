@@ -156,6 +156,29 @@ describe SystemReportsController, "POST #completion_count" do
         end
         
       end
+
+      it 'should show the total sum of closed issues for each user' do
+        @completion_count = CompletionCount.new(data)
+        CompletionCount.should_receive(:new).and_return(@completion_count)
+
+        @completion_count.should_receive(:total_closed_for_user).with(13).and_return(185)
+        @completion_count.should_receive(:total_closed_for_user).with(14).and_return(214)
+
+        post :completion_count, :completion_count => data
+        
+        response.should have_tag("#user-13") do
+          with_tag("tr.total-closed") do
+            with_tag('td', '185')
+          end
+        end
+
+        response.should have_tag("#user-14") do
+          with_tag("tr.total-closed") do
+            with_tag('td', '214')
+          end
+        end
+      end      
+
     end
   end
 

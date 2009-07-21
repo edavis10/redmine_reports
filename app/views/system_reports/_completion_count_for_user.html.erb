@@ -10,6 +10,10 @@
       <td><%= completion_count.total_by_tracker_for_user(tracker, user.id) %></td>
     </tr>
     <% end %>
+    <tr class="total-closed">
+      <td><%= l(:reports_completion_count_closed) %></td>
+      <td><%= completion_count.total_closed_for_user(user.id) %></td>
+    </tr>
   </tbody>
 </table>
 <br />

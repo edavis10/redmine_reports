@@ -59,3 +59,29 @@ describe CompletionCount, '#total_by_tracker_for_user' do
     @completion_count.total_by_tracker_for_user(@tracker, 123).should eql(1200)
   end
 end
+
+describe CompletionCount, "#total_closed_for_user" do
+  it 'should get a count of the number of closed tasks for the user' do
+    start_date = Date.yesterday
+    end_date = Date.today
+    IssueStatus.should_receive(:all).with(:conditions => {:is_closed => true}).and_return do
+      [mock_model(IssueStatus, :id => 4), mock_model(IssueStatus, :id => 5), mock_model(IssueStatus, :id => 7)]
+    end
+    
+    @completion_count = CompletionCount.new(:start_date => start_date, :end_date => end_date)
+
+    @tracker = mock_model(Tracker)
+
+    Issue.should_receive(:visible).and_return(Issue)
+    conditions = ["#{Issue.table_name}.updated_on >= (?) and #{Issue.table_name}.updated_on <= (?) and #{Issue.table_name}.status_id IN (?) and #{Issue.table_name}.assigned_to_id = (?)",
+                  start_date,
+                  end_date,
+                  [4,5,7],
+                  123
+                 ]
+    
+    Issue.should_receive(:count).with(:conditions => conditions).and_return(1100)
+  
+    @completion_count.total_closed_for_user(123).should eql(1100)
+  end
+end
