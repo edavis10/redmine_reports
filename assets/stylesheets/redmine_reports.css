@@ -1,6 +1,8 @@
 #content {overflow-x:scroll;}
 #activity { margin: 10px 0;}
 #activity table td {min-width: 200px; }
+#activity table td.user-column {min-width: 100px; text-align: center; }
+#activity table td.user-column gravatar {display: block; }
 
 div#activity table td div.details { background-repeat: no-repeat; padding-left: 20px; background-position: 0 0%}
 div#activity gravatar {float:left;}
