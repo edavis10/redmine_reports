@@ -4,7 +4,7 @@
 #activity table td.user-column {min-width: 100px; text-align: center; }
 #activity table td.user-column gravatar {display: block; }
 
-div#activity table td div.details { background-repeat: no-repeat; padding-left: 20px; background-position: 0 0%}
+div#activity table td div.details { background-repeat: no-repeat; padding-left: 20px; background-position: 0 0%; margin: 10px 0; border-top: 1px dotted #000000;}
 div#activity gravatar {float:left;}
 div#activity .time { color: #777; font-size: 80%; }
 div#activity .description { padding-top: 15px; }
