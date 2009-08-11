@@ -9,15 +9,18 @@ div#activity gravatar {float:left;}
 div#activity .time { color: #777; font-size: 80%; }
 div#activity .description { padding-top: 15px; }
 
-div.issue { background-image: url(../../../images/ticket.png); }
-div.issue-edit { background-image: url(../../../images/ticket_edit.png); }
-div.issue-closed { background-image: url(../../../images/ticket_checked.png); }
-div.issue-note { background-image: url(../../../images/ticket_note.png); }
-div.changeset { background-image: url(../../../images/changeset.png); }
-div.news { background-image: url(../../../images/news.png); }
-div.message { background-image: url(../../../images/message.png); }
-div.reply { background-image: url(../../../images/comments.png); }
-div.wiki-page { background-image: url(../../../images/wiki_edit.png); }
-div.attachment { background-image: url(../../../images/attachment.png); }
-div.document { background-image: url(../../../images/document.png); }
-div.project { background-image: url(../../../images/projects.png); }
+div#activity div.issue { background-image: url(../../../images/ticket.png); }
+div#activity div.issue-edit { background-image: url(../../../images/ticket_edit.png); }
+div#activity div.issue-closed { background-image: url(../../../images/ticket_checked.png); }
+div#activity div.issue-note { background-image: url(../../../images/ticket_note.png); }
+div#activity div.changeset { background-image: url(../../../images/changeset.png); }
+div#activity div.news { background-image: url(../../../images/news.png); }
+div#activity div.message { background-image: url(../../../images/message.png); }
+div#activity div.reply { background-image: url(../../../images/comments.png); }
+div#activity div.wiki-page { background-image: url(../../../images/wiki_edit.png); }
+div#activity div.attachment { background-image: url(../../../images/attachment.png); }
+div#activity div.document { background-image: url(../../../images/document.png); }
+div#activity div.project { background-image: url(../../../images/projects.png); }
+
+/* Clear out the Issue Details css */
+div.issue {background: none; border: none; margin-bottom: 0; padding: 0px}
