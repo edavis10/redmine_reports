@@ -9,6 +9,8 @@ def path_to(page_name)
     url_for(:controller => 'system_reports', :action => 'quickbooks')
   when /completion count/i
     url_for(:controller => 'system_reports', :action => 'completion_count')
+  when /activity report/i
+    url_for(:controller => 'system_reports', :action => 'activity_report')
   else
     raise "Can't find mapping from \"#{page_name}\" to a path."
   end

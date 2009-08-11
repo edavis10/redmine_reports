@@ -56,6 +56,7 @@ module SystemReportsSpecHelper
                                :anonymous? => false,
                                :name => "Administrator",
                                :projects => Project,
+                               :time_zone => ActiveSupport::TimeZone.all.first,
                                :language => 'en')
     @current_user.stub!(:allowed_to?).and_return(true)
 
@@ -70,6 +71,7 @@ module SystemReportsSpecHelper
                                :anonymous? => false,
                                :name => "User",
                                :projects => Project,
+                               :time_zone => ActiveSupport::TimeZone.all.first,
                                :language => 'en')
     User.stub!(:current).and_return(@current_user)
     return @current_user
