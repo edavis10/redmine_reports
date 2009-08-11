@@ -94,6 +94,11 @@ When /^I select some valid values for the report$/ do
   When 'I fill in "End date" with "2009-01-06"'
 end
 
+When /^I select some valid values for the "activity" report$/ do
+  When 'I fill in "Start" with "2009-01-01"'
+  When 'I fill in "End date" with "2009-01-06"'
+end
+
 Then /^I should see a menu called "(.*)"$/ do |named|
   response.should have_tag("div.contextual##{named}")
 end
@@ -167,4 +172,10 @@ end
 
 Then /^I see a subreport for each user$/ do
   response.should have_tag("table.user-report", :count => User.active.count)
+end
+
+Then /^I see the activity report for each user$/ do
+  response.should have_tag("table#activity-report-results") do
+    with_tag("tr")
+  end
 end
