@@ -1,3 +1,21 @@
-/*div.day-of-activity {width: 370px; float: left;}
-div.user-grouping {clear:both; overflow-x: scroll;}*/
-#activity table th {width: 370px; }
+#content {overflow-x:scroll;}
+#activity { margin: 10px 0;}
+#activity table td {min-width: 200px; }
+
+div#activity table td div.details { background-repeat: no-repeat; padding-left: 20px; background-position: 0 0%}
+div#activity gravatar {float:left;}
+div#activity .time { color: #777; font-size: 80%; }
+div#activity .description { padding-top: 15px; }
+
+div.issue { background-image: url(../../../images/ticket.png); }
+div.issue-edit { background-image: url(../../../images/ticket_edit.png); }
+div.issue-closed { background-image: url(../../../images/ticket_checked.png); }
+div.issue-note { background-image: url(../../../images/ticket_note.png); }
+div.changeset { background-image: url(../../../images/changeset.png); }
+div.news { background-image: url(../../../images/news.png); }
+div.message { background-image: url(../../../images/message.png); }
+div.reply { background-image: url(../../../images/comments.png); }
+div.wiki-page { background-image: url(../../../images/wiki_edit.png); }
+div.attachment { background-image: url(../../../images/attachment.png); }
+div.document { background-image: url(../../../images/document.png); }
+div.project { background-image: url(../../../images/projects.png); }

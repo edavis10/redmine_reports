@@ -11,7 +11,7 @@
 
 <% if request.post? && @activity_report.valid? %>
 <div id="activity">
-  <table class="list">
+  <table class="list" id="activity-report-results">
     <thead>
       <tr>
       <% (@activity_report.start_date.to_date..@activity_report.end_date.to_date).each do |day| %>
@@ -31,17 +31,15 @@
           <td></td>
         <% else %>
           <td>
-            <dl>
               <% activities_grouped_by_day[column_day].sort {|x,y| y.event_datetime <=> x.event_datetime }.each do |e| -%>
-                <dt class="<%= e.event_type %>  <%= User.current.logged? && e.respond_to?(:event_author) && User.current == e.event_author ? 'me' : nil %>">
-                <%= avatar(e.event_author, :size => "24") if e.respond_to?(:event_author) %>
-                <span class="time"><%= format_time(e.event_datetime) %></span>
+              <div class="details <%= e.event_type %>  <%= User.current.logged? && e.respond_to?(:event_author) && User.current == e.event_author ? 'me' : nil %>">
+                <%# avatar(e.event_author, :size => "24") if e.respond_to?(:event_author) %>
+                <span class="time"><%= format_time(e.event_datetime, false) %></span>
                 <%= content_tag('span', h(e.project), :class => 'project') %>
-                <%= link_to format_activity_title(e.event_title), e.event_url %></dt>
-                <dd><span class="description"><%= format_activity_description(e.event_description) %></span>
-                <span class="author"><%= e.event_author if e.respond_to?(:event_author) %></span></dd>
+                <%= link_to format_activity_title(e.event_title), e.event_url %>
+                <div class="description"><%= format_activity_description(e.event_description) %></div>
+              </div>
               <% end -%>
-            </dl>
           </td>
         <% end %>
 
