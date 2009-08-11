@@ -17,8 +17,10 @@ class ActivityReport < EphemeralModel
   def fetch
     @fetcher = Redmine::Activity::Fetcher.new(User.current, {:with_subprojects => Setting.display_subprojects_issues?})
     @fetcher.scope = :all
-    # TODO: need to +1 end_date
-    @events = @fetcher.events(start_date, end_date) 
+    # Need to add one day to the ending date because Fetcher doesn't
+    # include the ending date.
+    patched_end_date = end_date.to_date + 1
+    @events = @fetcher.events(start_date, patched_end_date)
   end
 
   def group_events_by_user
