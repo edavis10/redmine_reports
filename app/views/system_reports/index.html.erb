@@ -1,5 +1,15 @@
 <%= render :partial => 'menu' %>
 
+<%= content_tag(:h1, l(:reports_title)) %>
+
+<div id="reports-list">
+  <ul>
+    <% report_menu.each do |report_link| %>
+      <%= content_tag(:li, report_link) %>
+    <% end %>
+  </ul>
+</div>
+
 <% content_for :header_tags do %>
   <%= stylesheet_link_tag "redmine_reports.css", :plugin => "redmine_reports", :media => 'all' %>
 <% end %>

@@ -1,5 +1,7 @@
 .icon-issue { background-image: url(../../../images/ticket.png); }
 .icon-issue-complete { background-image: url(../../../images/ticket_checked.png); }
+#reports-list ul { list-style: none;}
+#reports-list ul { padding: 2px 0; }
 
 /* Activity Report */
 #content {overflow-x:scroll;}
