@@ -128,11 +128,12 @@ describe SystemReportsController, "POST #activity_report" do
       end
 
       it 'should fetch all Activity data in the date range' do
-        activity_report = mock_model(ActivityReport,
-                                     :valid? => true,
-                                     :errors => {},
-                                     :start_date => data["start_date"],
-                                     :end_date => data["end_date"])
+        activity_report = ActivityReport.new
+        activity_report.stub!(:default_users).and_return([@current_user, @another_user])
+        activity_report.stub!(:start_date).and_return(data["start_date"])
+        activity_report.stub!(:end_date).and_return(data["end_date"])
+        activity_report.stub!(:valid?).and_return(true)
+
         activity_report.should_receive(:fetch).and_return(@events)
         activity_report.should_receive(:group_events_by_user).and_return(@events_grouped_by_user)
         ActivityReport.should_receive(:new).and_return(activity_report)

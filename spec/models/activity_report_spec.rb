@@ -3,7 +3,8 @@ require File.dirname(__FILE__) + '/../spec_helper'
 def data(additional_data={})
   {
     "start_date"=>"2009-07-01",
-    "end_date"=>"2009-07-31"
+    "end_date"=>"2009-07-31",
+    "user_ids" => [""],
   }.merge(additional_data)
 end
 
@@ -17,6 +18,7 @@ describe ActivityReport, '#fetch' do
                mock_model(Journal, :event_author => @another_user),
                mock_model(Journal, :event_author => @current_user)
               ]
+    User.stub!(:active).and_return([@current_user, @another_user])
   end
 
   def mock_fetcher
