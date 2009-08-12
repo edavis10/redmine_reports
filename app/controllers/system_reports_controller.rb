@@ -24,6 +24,7 @@ class SystemReportsController < ApplicationController
     }
     
     self.reports << report
+    self.reports.uniq!
     self
   end
   
