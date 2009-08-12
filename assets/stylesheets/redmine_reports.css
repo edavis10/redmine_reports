@@ -1,3 +1,7 @@
+.icon-issue { background-image: url(../../../images/ticket.png); }
+.icon-issue-complete { background-image: url(../../../images/ticket_checked.png); }
+
+/* Activity Report */
 #content {overflow-x:scroll;}
 #activity { margin: 10px 0;}
 #activity table td {min-width: 200px; }

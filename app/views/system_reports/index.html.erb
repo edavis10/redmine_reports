@@ -1,1 +1,5 @@
 <%= render :partial => 'menu' %>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag "redmine_reports.css", :plugin => "redmine_reports", :media => 'all' %>
+<% end %>

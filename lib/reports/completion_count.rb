@@ -12,7 +12,7 @@ end
 # Added the report and configure it's permissions
 require 'dispatcher'
 Dispatcher.to_prepare do
-  SystemReportsController.add_report(:completion_count, Reports::CompletionCount, {:action => :completion_count, :label => :reports_completion_count})
+  SystemReportsController.add_report(:completion_count, Reports::CompletionCount, {:action => :completion_count, :label => :reports_completion_count, :class => 'icon-issue-complete'})
 
   # TODO: A better core API?
   Redmine::AccessControl.map {|map|
