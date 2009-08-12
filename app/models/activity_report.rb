@@ -20,7 +20,7 @@ class ActivityReport < EphemeralModel
     # Need to add one day to the ending date because Fetcher doesn't
     # include the ending date.
     patched_end_date = end_date.to_date + 1
-    @events = @fetcher.events(start_date, patched_end_date)
+    @events = @fetcher.events(start_date, patched_end_date.to_s)
   end
 
   def group_events_by_user

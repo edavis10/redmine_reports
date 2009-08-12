@@ -27,7 +27,7 @@ describe ActivityReport, '#fetch' do
   
   it 'should fetch all Activity data in the date range' do
     mock_fetcher
-    @fetcher.should_receive(:events).with(data['start_date'], data['end_date']).and_return(@events)
+    @fetcher.should_receive(:events).with(data['start_date'], '2009-08-01').and_return(@events)
     activity = ActivityReport.new(data)
     activity.fetch
   end
