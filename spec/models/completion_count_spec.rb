@@ -1,5 +1,54 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
+describe CompletionCount, '#role_ids=' do
+  before(:each) do
+    @user1 = mock_model(User, :id => 1, :quoted_id => '1')
+    @user2 = mock_model(User, :id => 2)
+
+    
+    @role1 = mock_model(Role)
+    @role1.stub!(:members).and_return do
+      [
+       mock_model(Member, :user => @user1),
+       mock_model(Member, :user => @user1),
+       mock_model(Member, :user => @user1)
+      ]
+    end
+
+    @role3 = mock_model(Role)
+    @role3.stub!(:members).and_return do
+      [
+       mock_model(Member, :user => @user1),
+       mock_model(Member, :user => @user2)
+      ]
+    end
+  end
+  
+  it 'should find all the Roles' do
+    Role.should_receive(:find_by_id).with(1).and_return(@role1)
+    Role.should_receive(:find_by_id).with(3).and_return(@role3)
+    @completion_count = CompletionCount.new(:role_ids => ['1',3])
+  end
+
+  it 'should add all of the users with the Roles to the users list' do
+    Role.should_receive(:find_by_id).with(1).and_return(@role1)
+    Role.should_receive(:find_by_id).with(3).and_return(@role3)
+    @completion_count = CompletionCount.new(:role_ids => ['1',3])
+    
+    @completion_count.users.should include(@user1)
+    @completion_count.users.should include(@user2)
+  end
+
+  it 'should not duplicate users' do
+    Role.should_receive(:find_by_id).with(1).and_return(@role1)
+    Role.should_receive(:find_by_id).with(3).and_return(@role3)
+    @completion_count = CompletionCount.new(:role_ids => ['1',3])
+    
+    @completion_count.users.size.should eql(2)
+  end
+end
+
+
 describe CompletionCount, '#total_incoming' do
   it 'should get a count of the number of issues created in the date range' do
     start_date = Date.yesterday
