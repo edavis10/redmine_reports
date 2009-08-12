@@ -62,12 +62,14 @@ class CompletionCount < EphemeralModel
   end
 
   def total_by_tracker_for_user(tracker, user_id)
+    closed_issue_status_ids = IssueStatus.all(:conditions => {:is_closed => true}).collect(&:id)
     Issue.visible.count(:conditions =>
-                        ["#{Issue.table_name}.updated_on >= (?) and #{Issue.table_name}.updated_on <= (?) and #{Issue.table_name}.tracker_id = (?) and #{Issue.table_name}.assigned_to_id = (?)",
+                        ["#{Issue.table_name}.updated_on >= (?) and #{Issue.table_name}.updated_on <= (?) and #{Issue.table_name}.tracker_id = (?) and #{Issue.table_name}.assigned_to_id = (?) and #{Issue.table_name}.status_id IN (?)",
                          start_date,
                          end_date,
                          tracker.id,
-                         user_id
+                         user_id,
+                         closed_issue_status_ids
                         ])
   end
 

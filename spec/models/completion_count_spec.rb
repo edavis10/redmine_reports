@@ -88,19 +88,24 @@ describe CompletionCount, '#total_completed' do
 end
 
 describe CompletionCount, '#total_by_tracker_for_user' do
-  it 'should get a count of the number of tasks that are in the tracker for the user' do
+  it 'should get a count of the number of closed tasks that are in the tracker for the user' do
     start_date = Date.yesterday
     end_date = Date.today
+    IssueStatus.should_receive(:all).with(:conditions => {:is_closed => true}).and_return do
+      [mock_model(IssueStatus, :id => 4), mock_model(IssueStatus, :id => 5), mock_model(IssueStatus, :id => 7)]
+    end
+
     @completion_count = CompletionCount.new(:start_date => start_date, :end_date => end_date)
 
     @tracker = mock_model(Tracker)
 
     Issue.should_receive(:visible).and_return(Issue)
-    conditions = ["#{Issue.table_name}.updated_on >= (?) and #{Issue.table_name}.updated_on <= (?) and #{Issue.table_name}.tracker_id = (?) and #{Issue.table_name}.assigned_to_id = (?)",
+    conditions = ["#{Issue.table_name}.updated_on >= (?) and #{Issue.table_name}.updated_on <= (?) and #{Issue.table_name}.tracker_id = (?) and #{Issue.table_name}.assigned_to_id = (?) and #{Issue.table_name}.status_id IN (?)",
                   start_date,
                   end_date,
                   @tracker.id,
-                  123
+                  123,
+                  [4,5,7]
                  ]
     
     Issue.should_receive(:count).with(:conditions => conditions).and_return(1200)

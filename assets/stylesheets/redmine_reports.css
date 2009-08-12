@@ -3,6 +3,9 @@
 #reports-list ul { list-style: none;}
 #reports-list ul { padding: 2px 0; }
 
+/* Completion Count */
+tr.total-closed {font-weight: bold;}
+
 /* Activity Report */
 #content {overflow-x:scroll;}
 #activity { margin: 10px 0;}

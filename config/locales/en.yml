@@ -12,7 +12,7 @@ en:
   reports_completion_count_completed: Completed
   reports_completion_count_difference: Difference
   reports_completion_count_all_users: All Users
-  reports_completion_count_closed: Closed issues
+  reports_completion_count_closed: Total Closed Issues
   field_end_date: End date
   field_users: Users
   field_roles: Roles
