@@ -8,13 +8,13 @@ Feature: Completion Count Report
     And I am on the system report overview page
 
     Then I should see "Reports"
-    And I should see a link "Completion Count"
+    And I should see a link "Completion Report"
 
   Scenario: Open link to the Completion Count report
     Given I am logged in as a user with permission to "run completion count"
     And I am on the system report overview page
 
-    When I follow "Completion Count"
+    When I follow "Completion Report"
 
     Then I am on the "completion count" page
 
@@ -32,7 +32,7 @@ Feature: Completion Count Report
     Given I am logged in as a user with permission to "run completion count"
     When I visit the "completion count" page
 
-    Then I should see "Completion Count Report"
+    Then I should see "Completion Report"
     And I should see "Start"
     And I should see "End date"
     And I should see "Users"
