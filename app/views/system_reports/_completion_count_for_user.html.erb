@@ -1,4 +1,5 @@
 <% user = completion_count_for_user %>
+<% if completion_count.total_closed_for_user(user.id) > 0 %>
 <table class="list issues user-report" id="user-<%= h user.id -%>">
   <thead>
     <th colspan="2"><%= h user.name %></th>
@@ -16,4 +17,9 @@
     </tr>
   </tbody>
 </table>
+<% else %>
+<p>
+  <%= h user.name -%> (<%= l(:label_none) %>)
+</p>
+<% end %>
 <br />

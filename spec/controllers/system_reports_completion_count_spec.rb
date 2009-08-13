@@ -129,6 +129,8 @@ describe SystemReportsController, "POST #completion_count" do
         @completion_count.should_receive(:total_by_tracker_for_user).with(@feature, 13).and_return(16)
         @completion_count.should_receive(:total_by_tracker_for_user).with(@bug, 14).and_return(24)
         @completion_count.should_receive(:total_by_tracker_for_user).with(@feature, 14).and_return(56)
+        @completion_count.stub!(:total_closed_for_user).with(13).and_return(100)
+        @completion_count.stub!(:total_closed_for_user).with(14).and_return(100)
         
         post :completion_count, :completion_count => data
 
@@ -162,8 +164,8 @@ describe SystemReportsController, "POST #completion_count" do
         @completion_count = CompletionCount.new(data)
         CompletionCount.should_receive(:new).and_return(@completion_count)
 
-        @completion_count.should_receive(:total_closed_for_user).with(13).and_return(185)
-        @completion_count.should_receive(:total_closed_for_user).with(14).and_return(214)
+        @completion_count.should_receive(:total_closed_for_user).with(13).at_least(:once).and_return(185)
+        @completion_count.should_receive(:total_closed_for_user).with(14).at_least(:once).and_return(214)
 
         post :completion_count, :completion_count => data
         
