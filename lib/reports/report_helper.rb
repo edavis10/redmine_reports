@@ -49,11 +49,11 @@ module Reports
       end
 
       def default_users
-        User.active
+        User.active.sort
       end
 
       def selected_users_or_all_users
-        users.blank? ? User.active : users
+        users.blank? ? User.active.sort : users.sort
       end
       
       def selected_user_ids

@@ -12,13 +12,18 @@ end
 
 describe ActivityReport, '#fetch' do
   before(:each) do
+    @current_user = mock_model(User, :id => 1)
+    @another_user = mock_model(User, :id => 2)
+    @users = [@current_user, @another_user]
+    @users.stub!(:sort).and_return(@users)
+
     @events = [
                mock_model(Issue, :event_author => @current_user),
                mock_model(Issue, :event_author => @current_user),
                mock_model(Journal, :event_author => @another_user),
                mock_model(Journal, :event_author => @current_user)
               ]
-    User.stub!(:active).and_return([@current_user, @another_user])
+    User.stub!(:active).and_return(@users)
   end
 
   def mock_fetcher

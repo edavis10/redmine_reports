@@ -53,12 +53,13 @@ describe SystemReportsController, "POST #completion_count" do
   integrate_views
 
   def user_mocks
-    User.stub!(:find).and_return do
-      [
-       mock_model(User, :id => 13, :name => 'Test 13', :valid? => true),
-       mock_model(User, :id => 14, :name => 'Test 14', :valid? => true)
-      ]
-    end
+    @users = [
+              mock_model(User, :id => 13, :name => 'Test 13', :valid? => true, :<=> => -1),
+              mock_model(User, :id => 14, :name => 'Test 14', :valid? => true, :<=> => 1)
+             ]
+    @users.stub!(:sort).and_return(@users)
+
+    User.stub!(:find).and_return(@users)
   end
   
   before(:each) do

@@ -21,6 +21,6 @@ class ActivityReport < EphemeralModel
   end
 
   def group_events_by_user
-    @events_by_user ||= @events.group_by(&:event_author)
+    @events_by_user ||= @events.group_by(&:event_author).sort
   end
 end
