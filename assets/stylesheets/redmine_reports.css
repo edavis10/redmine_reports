@@ -3,6 +3,11 @@
 #reports-list ul { list-style: none;}
 #reports-list ul { padding: 2px 0; }
 
+/* Form */
+form.tabular p {float:left; clear: none; padding-left: 0;}
+form.tabular label {float: none; margin-left: 5px; text-align: left; display: block;}
+form.tabular p.submit {clear: both; }
+
 /* Completion Count */
 tr.total-closed {font-weight: bold;}
 
