@@ -11,11 +11,11 @@ module SystemReportsHelper
                         )
       end
 
-      menu << link_to(l(:label_issue_view_all), { :controller => 'issues' }, :class => 'icon icon-issue')
-      menu << link_to(l(:label_overall_activity), { :controller => 'projects', :action => 'activity' }, :class => 'icon icon-activity')
+      menu << link_to(l(:reports_all_issues), { :controller => 'issues' }, :class => 'icon icon-issue')
+      menu << link_to(l(:reports_system_activity), { :controller => 'projects', :action => 'activity' }, :class => 'icon icon-activity')
 
-      menu << link_to(l(:label_details), {:controller => 'timelog', :action => 'details'}, :class => 'icon icon-time')
-      menu << link_to(l(:label_report), {:controller => 'timelog', :action => 'report'}, :class => 'icon icon-time')
+      menu << link_to(l(:reports_spent_time_details), {:controller => 'timelog', :action => 'details'}, :class => 'icon icon-time')
+      menu << link_to(l(:reports_spent_time_reports), {:controller => 'timelog', :action => 'report'}, :class => 'icon icon-time')
 
       
     end

@@ -7,7 +7,7 @@ en:
   reports_text_unspent_labor: Unspent Labor
   reports_text_unbilled_labor: Unbilled Labor
   reports_text_total_po: Total PO
-  reports_completion_count: Completion Count Report
+  reports_completion_count: Completion Report
   reports_completion_count_incoming: Incoming
   reports_completion_count_completed: Completed
   reports_completion_count_difference: Difference
@@ -16,4 +16,8 @@ en:
   field_end_date: End date
   field_users: Users
   field_roles: Roles
-  reports_activity_report: Activity Report
+  reports_activity_report: User Activity Report
+  reports_system_activity: System Activity List
+  reports_spent_time_details: Spent Time Details
+  reports_spent_time_reports: Spent Time Summary Reports
+  reports_all_issues: All Issues
