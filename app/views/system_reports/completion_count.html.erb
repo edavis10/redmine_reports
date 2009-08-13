@@ -6,8 +6,8 @@
 
 <p><%= f.text_field :start_date, :size => 10 %><%= calendar_for('completion_count_start_date') %></p>
 <p><%= f.text_field :end_date, :size => 10 %><%= calendar_for('completion_count_end_date') %></p>
-<p><%= f.label :users %><%= f.collection_select :user_ids, @completion_count.default_users, :id, :name, {:prompt => 'All techs', :selected => @completion_count.selected_user_ids}, {:multiple => true} %></p>
-<p><%= f.label :roles %><%= f.collection_select :role_ids, Role.all, :id, :name, {:selected => @completion_count.role_ids.collect(&:to_i)}, {:multiple => true} %></p>
+<p><%= f.label :users %><%= f.collection_select :user_ids, @completion_count.default_users, :id, :name, {:prompt => 'All techs', :selected => @completion_count.selected_user_ids}, {:multiple => true, :size => select_size } %></p>
+<p><%= f.label :roles %><%= f.collection_select :role_ids, Role.all, :id, :name, {:selected => @completion_count.role_ids.collect(&:to_i)}, {:multiple => true, :size => select_size } %></p>
 <%= submit_tag l(:button_apply) %>
 <% end %>
 

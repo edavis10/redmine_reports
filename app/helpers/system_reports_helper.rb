@@ -20,4 +20,9 @@ module SystemReportsHelper
       
     end
   end
+
+  def select_size
+    select_size = Setting.plugin_redmine_reports['select_size'] || 5
+    select_size.to_i
+  end
 end
