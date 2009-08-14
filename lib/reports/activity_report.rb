@@ -13,7 +13,7 @@ end
 # Added the report and configure it's permissions
 require 'dispatcher'
 Dispatcher.to_prepare do
-  SystemReportsController.add_report(:activity_report, Reports::ActivityReport, {:action => :activity_report, :label => :reports_activity_report})
+  SystemReportsController.add_report(:activity_report, Reports::ActivityReport, {:action => :activity_report, :label => :reports_activity_report, :class => 'icon-activity'})
 
   # TODO: A better core API?
   Redmine::AccessControl.map {|map|

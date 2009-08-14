@@ -49,4 +49,4 @@ class SystemReportsController < ApplicationController
   end
 end
 
-SystemReportsController.add_report(:index, nil, :label => :reports_overview)
+SystemReportsController.add_report(:index, nil, :label => :reports_overview, :class => 'icon-overview')
