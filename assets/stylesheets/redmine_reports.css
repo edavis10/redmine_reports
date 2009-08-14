@@ -1,7 +1,10 @@
+.contextual {text-align:right; width: 80%; white-space: normal;}
+.icon {margin-left: 5px;}
 .icon-issue { background-image: url(../../../images/ticket.png); }
 .icon-issue-complete { background-image: url(../../../images/ticket_checked.png); }
 .icon-calendar { background-image: url(../../../images/calendar.png); }
 .icon-gantt { background-image: url(../images/chart_organisation.png); }
+.icon-redmine-graphs { background-image: url(../images/chart_line.png); }
 
 #reports-list ul { list-style: none;}
 #reports-list ul { padding: 2px 0; }

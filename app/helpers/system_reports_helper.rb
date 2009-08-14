@@ -20,6 +20,12 @@ module SystemReportsHelper
 
       menu << link_to(l(:label_calendar), {:controller => 'issues', :action => 'calendar'}, :class => 'icon icon-calendar')
       menu << link_to(l(:label_gantt), {:controller => 'issues', :action => 'gantt'}, :class => 'icon icon-gantt')
+
+      if Redmine::Plugin.registered_plugins.keys.include? :redmine_graphs
+        menu << link_to(l(:label_graphs_old_issues), {:controller => 'graphs', :action => 'old_issues'}, :class => 'icon icon-redmine-graphs')
+        menu << link_to(l(:label_graphs_issue_growth), {:controller => 'graphs', :action => 'issue_growth'}, :class => 'icon icon-redmine-graphs')
+      end
+
       
     end
   end
