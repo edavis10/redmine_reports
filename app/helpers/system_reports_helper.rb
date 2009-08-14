@@ -17,6 +17,9 @@ module SystemReportsHelper
       menu << link_to(l(:reports_spent_time_details), {:controller => 'timelog', :action => 'details'}, :class => 'icon icon-time')
       menu << link_to(l(:reports_spent_time_reports), {:controller => 'timelog', :action => 'report'}, :class => 'icon icon-time')
 
+
+      menu << link_to(l(:label_calendar), {:controller => 'issues', :action => 'calendar'}, :class => 'icon icon-calendar')
+      menu << link_to(l(:label_gantt), {:controller => 'issues', :action => 'gantt'}, :class => 'icon icon-gantt')
       
     end
   end
