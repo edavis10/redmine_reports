@@ -44,7 +44,7 @@
           <td></td>
         <% else %>
           <td>
-              <% activities_grouped_by_day[column_day].sort {|x,y| y.event_datetime <=> x.event_datetime }.each do |e| -%>
+              <% activities_grouped_by_day[column_day].sort {|x,y| x.event_datetime <=> y.event_datetime }.each do |e| -%>
               <div class="details <%= e.event_type %>  <%= User.current.logged? && e.respond_to?(:event_author) && User.current == e.event_author ? 'me' : nil %>">
                 <span class="time"><%= format_time(e.event_datetime, false) %></span>
                 <%= content_tag('span', h(e.project), :class => 'project') %>
