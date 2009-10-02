@@ -1,5 +1,9 @@
-require_dependency 'application'
-
+begin
+  require_dependency 'application'
+rescue LoadError
+  require_dependency 'application_controller' # Rails 2.3
+end
+  
 class SystemReportsController < ApplicationController
   unloadable
   before_filter :check_permissions
