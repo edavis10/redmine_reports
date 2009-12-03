@@ -25,7 +25,7 @@ module Reports
           v.each do |id|
             role = Role.find_by_id(id.to_i)
             if role
-              self.users += role.members.collect(&:user).uniq
+              self.users += role.members.collect(&:user).uniq.compact
               @selected_role_ids ||= []
               @selected_role_ids << role.id
             end
