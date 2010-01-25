@@ -25,15 +25,15 @@
   <tbody>
     <tr class="incoming">
       <td><%= l(:reports_completion_count_incoming) %></td>
-      <td><%= @completion_count.total_incoming %></td>
+      <td id="total-incoming"><%= @completion_count.total_incoming %></td>
     </tr>
     <tr class="completed">
       <td><%= l(:reports_completion_count_completed) %></td>
-      <td><%= @completion_count.total_completed %></td>
+      <td id="total-completed"><%= @completion_count.total_completed %></td>
     </tr>
     <tr class="difference">
       <td><%= l(:reports_completion_count_difference) %></td>
-      <td><%= @completion_count.total_incoming - @completion_count.total_completed %></td>
+      <td id="total-difference"><%= @completion_count.total_incoming - @completion_count.total_completed %></td>
     </tr>
   </tbody>
 </table>

@@ -5,7 +5,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../../../test/test_helper
 Engines::Testing.set_fixture_path
 
 # Helpers
-class Test::Unit::TestCase
+class ActiveSupport::TestCase
   def configure_plugin(fields={})
     Setting.plugin_redmine_reports = fields.stringify_keys
   end
@@ -14,4 +14,10 @@ class Test::Unit::TestCase
     configure_plugin({
                      })
   end
+
+  def build_anonymous_role
+    @role = Role.generate!
+    @role.update_attribute(:builtin,  Role::BUILTIN_ANONYMOUS)
+  end
+
 end
