@@ -11,7 +11,12 @@ class ActiveSupport::TestCase
   end
 
   def setup_plugin_configuration
+    @excluded_status1 = IssueStatus.generate!(:is_closed => true)
     configure_plugin({
+                       'select_size' => '5',
+                       'completion_count' => {
+                         'exclude_statuses' => [@excluded_status1.id.to_s]
+                       }
                      })
   end
 
