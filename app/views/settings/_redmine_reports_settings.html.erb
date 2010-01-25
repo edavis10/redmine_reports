@@ -2,3 +2,17 @@
   <%= content_tag(:label, l(:reports_label_select_size)) %>
   <%= text_field_tag 'settings[select_size]', @settings['select_size'] %>
 </p>
+
+<fieldset>
+  <legend><%= l(:reports_completion_count) %></legend>
+
+  <p>
+    <%= label_tag(l(:reports_text_exclude_statuses)) %>
+
+    <% selected_statuses = @settings['completion_count']['exclude_statuses'].collect(&:to_i) unless @settings['completion_count'].blank? %>
+    <%= select_tag('settings[completion_count][exclude_statuses]',
+        options_from_collection_for_select(IssueStatus.all, :id, :name, selected_statuses),
+        :multiple => true,
+        :size => 5) %>
+  </p>
+</fieldset>

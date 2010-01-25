@@ -17,7 +17,10 @@ Redmine::Plugin.register :redmine_reports do
   menu :top_menu, :reports, { :controller => 'system_reports', :action => 'index'}, :caption => :reports_menu, :if => Proc.new{User.current.logged?}
 
   settings(:default => {
-             'select_size' => '5'
+             'select_size' => '5',
+             'completion_count' => {
+               'exclude_statuses' => []
+             }
            },
            :partial => 'settings/redmine_reports_settings')
 end
