@@ -22,3 +22,5 @@ en:
   reports_spent_time_reports: Spent Time Summary Reports
   reports_all_issues: All Issues
   reports_label_select_size: Size of select fields
+  reports_completion_count_excluded: Excluded
+  reports_text_exclude_statuses: Excluded Statuses

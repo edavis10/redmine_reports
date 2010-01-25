@@ -35,6 +35,10 @@
       <td><%= l(:reports_completion_count_difference) %></td>
       <td id="total-difference"><%= @completion_count.total_incoming - @completion_count.total_completed %></td>
     </tr>
+    <tr class="excluded">
+      <td><%= l(:reports_completion_count_excluded) %></td>
+      <td id="total-excluded"><%= @completion_count.total_excluded %></td>
+    </tr>
   </tbody>
 </table>
 <br />

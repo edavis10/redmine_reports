@@ -10,6 +10,7 @@ class SystemReportsControllerCompletionCountTest < ActionController::TestCase
     @request = ActionController::TestRequest.new
     @response = ActionController::TestResponse.new
     build_anonymous_role
+    setup_plugin_configuration
   end
 
   context "GET :completion_count" do
@@ -89,6 +90,15 @@ class SystemReportsControllerCompletionCountTest < ActionController::TestCase
                                       :status => @closed
                                     })
 
+        # Feature, Excluded User2
+        Issue.generate_for_project!(@project, {
+                                      :assigned_to => @user2,
+                                      :tracker => @feature,
+                                      :created_on => 2.days.ago,
+                                      :updated_on => 1.day.ago,
+                                      :status => @excluded_status1
+                                    })
+
         # Feature, out of date range
         Issue.generate_for_project!(@project, {
                                       :assigned_to => @user2,
@@ -119,6 +129,10 @@ class SystemReportsControllerCompletionCountTest < ActionController::TestCase
 
         should 'show the difference' do
           assert_select 'td#total-difference', '1'
+        end
+
+        should 'show the excluded count' do
+          assert_select 'td#total-excluded', '1'
         end
       end
 

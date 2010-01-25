@@ -19,6 +19,18 @@ class CompletionCount < EphemeralModel
 
   end
 
+  def total_excluded
+    if Setting.plugin_redmine_reports['completion_count'].present? && Setting.plugin_redmine_reports['completion_count']['exclude_statuses'].present?
+      Issue.visible.count(:conditions =>
+                          ["#{Issue.table_name}.created_on >= (?) and #{Issue.table_name}.created_on <= (?) and #{Issue.table_name}.status_id IN (?)",
+                           start_date,
+                           end_date,
+                           Setting.plugin_redmine_reports['completion_count']['exclude_statuses'].collect(&:to_i)])
+    else
+      return 0
+    end
+  end
+
   def total_by_tracker_for_user(tracker, user_id)
     Issue.visible.count(:conditions =>
                         ["#{Issue.table_name}.updated_on >= (?) and #{Issue.table_name}.updated_on <= (?) and #{Issue.table_name}.tracker_id = (?) and #{Issue.table_name}.assigned_to_id = (?) and #{Issue.table_name}.status_id IN (?)",
