@@ -1,0 +1,26 @@
+ru:
+  reports_title: Отчёты
+  reports_menu: Отчёты
+  reports_overview: Обзор
+  reports_quickbooks: Quickbooks
+  reports_text_unbilled_po: Unbilled PO
+  reports_text_unspent_labor: Unspent Labor
+  reports_text_unbilled_labor: Unbilled Labor
+  reports_text_total_po: Total PO
+  reports_completion_count: Отчёт о выполнении
+  reports_completion_count_incoming: Входящие
+  reports_completion_count_completed: Выполнено
+  reports_completion_count_difference: Разница
+  reports_completion_count_all_users: Все пользователи
+  reports_completion_count_closed: Всего закрыто задач
+  field_end_date: Дата окончания
+  field_user_ids: Пользователи
+  field_role_ids: Роли
+  reports_activity_report: Отчёт об активности пользователей
+  reports_system_activity: Системный список активности
+  reports_spent_time_details: Затраченное время
+  reports_spent_time_reports: Отчёты о сумме затраченного времени
+  reports_all_issues: Все задачи
+  reports_label_select_size: Размер выбранных полей
+  reports_completion_count_excluded: Исключено
+  reports_text_exclude_statuses: Исключённые статусы
