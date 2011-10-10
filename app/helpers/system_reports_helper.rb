@@ -12,14 +12,14 @@ module SystemReportsHelper
       end
 
       menu << link_to(l(:reports_all_issues), { :controller => 'issues' }, :class => 'icon icon-issue')
-      menu << link_to(l(:reports_system_activity), { :controller => 'projects', :action => 'activity' }, :class => 'icon icon-activity')
+      menu << link_to(l(:reports_system_activity), { :controller => 'activities', :action => 'index' }, :class => 'icon icon-activity')
 
-      menu << link_to(l(:reports_spent_time_details), {:controller => 'timelog', :action => 'details'}, :class => 'icon icon-time')
-      menu << link_to(l(:reports_spent_time_reports), {:controller => 'timelog', :action => 'report'}, :class => 'icon icon-time')
+      menu << link_to(l(:reports_spent_time_details), {:controller => 'time_entries', :action => 'index'}, :class => 'icon icon-time')
+      menu << link_to(l(:reports_spent_time_reports), {:controller => 'time_entry_reports', :action => 'report'}, :class => 'icon icon-time')
 
 
-      menu << link_to(l(:label_calendar), {:controller => 'issues', :action => 'calendar'}, :class => 'icon icon-calendar')
-      menu << link_to(l(:label_gantt), {:controller => 'issues', :action => 'gantt'}, :class => 'icon icon-gantt')
+      menu << link_to(l(:label_calendar), {:controller => 'calendars', :action => 'show'}, :class => 'icon icon-calendar')
+      menu << link_to(l(:label_gantt), {:controller => 'gantts', :action => 'show'}, :class => 'icon icon-gantt')
 
       if Redmine::Plugin.registered_plugins.keys.include? :redmine_graphs
         menu << link_to(l(:label_graphs_old_issues), {:controller => 'graphs', :action => 'old_issues'}, :class => 'icon icon-redmine-graphs')
